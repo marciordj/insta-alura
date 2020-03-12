@@ -1,28 +1,32 @@
 /* eslint-disable prettier/prettier */
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { FlatList, ScrollView } from 'react-native';
 
-import Batman from './assets/img/Batman.jpg';
-import MasterMage from './assets/img/mestreMago.jpg';
-import Spider from './assets/img/spider.jpg';
 import Header from './components/Header';
 import Post from './components/Posts';
 
 const App = () => {
-  const userInfo = [
-    {id: 1, name: 'Peter', photo: Spider, desc: 'blablablablablablablabla' },
-    {id: 2, name: 'Bruce', photo: Batman, desc: 'blabalablablabalablaba' },
-    {id: 3, name: 'Master Mage', photo: MasterMage, desc: 'blabalablablabla'},
-  ];
+  const [info, setInfo] = useState([]);
+
+  useEffect(() => {
+    const instaData = async() => {
+      const response = await fetch('http://10.0.2.2:3030/feed');
+      const dataJson: any = await response.json();
+
+      setInfo(dataJson);
+    };
+
+    instaData();
+  }, []);
 
   return (
     <ScrollView>
       <FlatList
-        data={userInfo}
-        renderItem={({item}) => (
+        data={info}
+        renderItem={({item}: any) => (
           <Fragment>
-            <Header userName={item.name} personalPhoto={item.photo} />
-            <Post postImg={item.photo} postDescribe={item.desc}/>
+            <Header userName={item.userName}/>
+            <Post postImg={item.photo} />
           </Fragment>
         )}
         keyExtractor={item => item.id.toString()}
