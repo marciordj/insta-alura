@@ -10,7 +10,8 @@ const App = () => {
 
   useEffect(() => {
     const instaData = async() => {
-      const response = await fetch('http://10.0.2.2:3030/feed');
+      const url = 'http://192.168.3.29:3030/feed';
+      const response = await fetch(url);
       const dataJson: any = await response.json();
 
       setInfo(dataJson);
@@ -25,8 +26,8 @@ const App = () => {
         data={info}
         renderItem={({item}: any) => (
           <Fragment>
-            <Header userName={item.userName}/>
-            <Post postImg={item.photo} />
+            <Header userName={item.userName} userImg={item.userURL}/>
+            <Post postImg={item.url} />
           </Fragment>
         )}
         keyExtractor={item => item.id.toString()}

@@ -2,10 +2,10 @@
 import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 
-const Header = ({userName, personalPhoto}: any) => {
+const Header = ({userName, userImg}: any) => {
   return (
       <View style={styles.container}>
-        <Image source={personalPhoto} style={styles.imgHeader} />
+        <Image source={{uri: userImg}} style={styles.imgHeader} />
         <Text style={styles.titleName}>{userName}</Text>
       </View>
   );
@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   titleName: {
-    fontWeight: 'bold',
     fontSize: 20,
   },
   imgHeader: {

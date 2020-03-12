@@ -5,7 +5,7 @@ import { Dimensions, Image, StyleSheet, Text, View } from 'react-native';
 const Posts = ({postImg, postDescribe}: any) => {
   return (
     <View>
-      <Image source={postImg} style={styles.image} />
+      <Image source={{uri: postImg}} style={styles.image} />
       <Text style={styles.textDesc}>{postDescribe}</Text>
     </View>
   );
