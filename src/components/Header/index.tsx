@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     marginRight: 10,
+    marginTop: 20,
     borderRadius: 100,
   },
 });

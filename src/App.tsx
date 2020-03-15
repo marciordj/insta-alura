@@ -2,6 +2,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { FlatList, ScrollView } from 'react-native';
 
+import instaData from './api/feed';
 import Header from './components/Header';
 import Post from './components/Posts';
 
@@ -9,15 +10,7 @@ const App = () => {
   const [info, setInfo] = useState([]);
 
   useEffect(() => {
-    const instaData = async() => {
-      const url = 'http://192.168.3.29:3030/feed';
-      const response = await fetch(url);
-      const dataJson: any = await response.json();
-
-      setInfo(dataJson);
-    };
-
-    instaData();
+    instaData(setInfo);
   }, []);
 
   return (
@@ -27,7 +20,7 @@ const App = () => {
         renderItem={({item}: any) => (
           <Fragment>
             <Header userName={item.userName} userImg={item.userURL}/>
-            <Post postImg={item.url} />
+            <Post postImg={item.url} postDescribe={item.description} />
           </Fragment>
         )}
         keyExtractor={item => item.id.toString()}
